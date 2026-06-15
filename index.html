@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Inteligent Digital Products (IDP) — An AI-native product studio building next-generation B2P consumer utilities and B2B SME agentic digital transformation workflows in Portugal.">
+    <title>IDP | AI-Native Product Studio — Inteligent Digital Products</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800;900&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Icons (Lucide Icons CDN) -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+    <!-- ═══════════════════════════════════════════════
+         CINEMATIC INTRO OVERLAY
+         ═══════════════════════════════════════════════ -->
+    <div class="intro-overlay" id="intro-overlay">
+        <div class="intro-content">
+            <div class="intro-logo" id="intro-logo">
+                <span class="intro-accent">I</span>DP
+            </div>
+            <div class="intro-tagline" id="intro-tagline">AI-Native Product Studio</div>
+            <div class="intro-bar">
+                <div class="intro-bar-fill" id="intro-bar-fill"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════
+         ATMOSPHERIC LAYERS
+         ═══════════════════════════════════════════════ -->
+
+    <!-- Noise Grain Overlay -->
+    <div class="noise-overlay" aria-hidden="true"></div>
+
+    <!-- Animated Gradient Mesh Background -->
+    <div class="gradient-mesh" aria-hidden="true">
+        <div class="mesh-blob mesh-1"></div>
+        <div class="mesh-blob mesh-2"></div>
+        <div class="mesh-blob mesh-3"></div>
+        <div class="mesh-blob mesh-4"></div>
+    </div>
+
+    <!-- Celestial Particles Canvas -->
+    <canvas class="celestial-canvas" id="celestial-particles-canvas" aria-hidden="true"></canvas>
+
+    <!-- Interactive Mouse Spotlight -->
+    <div class="mouse-spotlight" id="bg-spotlight" aria-hidden="true"></div>
+
+    <!-- Cursor Trailer -->
+    <!-- <div class="cursor-trailer" id="cursor-trailer" aria-hidden="true"></div> -->
+
+    <!-- ═══════════════════════════════════════════════
+         TOP SCROLL PROGRESS BAR
+         ═══════════════════════════════════════════════ -->
+    <div class="scroll-progress-bar" id="scroll-progress-bar" aria-hidden="true"></div>
+
+    <!-- ═══════════════════════════════════════════════
+         RIGHT SIDE NAVIGATION DOTS
+         ═══════════════════════════════════════════════ -->
+    <nav class="side-nav" id="side-nav-dots" aria-label="Section Navigation">
+        <a href="#hero" class="side-nav-dot active" data-index="0" aria-label="Go to Manifesto">
+            <span class="side-nav-label">//00 Manifesto</span>
+            <span class="side-nav-pip"></span>
+        </a>
+        <a href="#about" class="side-nav-dot" data-index="1" aria-label="Go to Philosophy">
+            <span class="side-nav-label">//01 Philosophy</span>
+            <span class="side-nav-pip"></span>
+        </a>
+        <a href="#b2p" class="side-nav-dot" data-index="2" aria-label="Go to RELOAD">
+            <span class="side-nav-label">//02 RELOAD</span>
+            <span class="side-nav-pip"></span>
+        </a>
+        <a href="#b2b" class="side-nav-dot" data-index="3" aria-label="Go to Agentic">
+            <span class="side-nav-label">//03 Agentic</span>
+            <span class="side-nav-pip"></span>
+        </a>
+        <a href="#calculator" class="side-nav-dot" data-index="4" aria-label="Go to Savings">
+            <span class="side-nav-label">//04 Savings</span>
+            <span class="side-nav-pip"></span>
+        </a>
+        <a href="#responsible-ai" class="side-nav-dot" data-index="5" aria-label="Go to Ethics">
+            <span class="side-nav-label">//05 Ethics</span>
+            <span class="side-nav-pip"></span>
+        </a>
+        <a href="#contact" class="side-nav-dot" data-index="6" aria-label="Go to Pilot">
+            <span class="side-nav-label">//06 Pilot</span>
+            <span class="side-nav-pip"></span>
+        </a>
+    </nav>
+
+    <!-- ═══════════════════════════════════════════════
+         NAVIGATION BAR
+         ═══════════════════════════════════════════════ -->
+    <header class="navbar" id="main-header">
+        <div class="nav-container">
+            <a href="#hero" class="logo" id="nav-logo">
+                <span class="logo-accent">I</span>DP
+            </a>
+            <nav class="nav-links" id="nav-links">
+                <a href="#hero" class="nav-link" id="link-hero">Manifesto</a>
+                <a href="#about" class="nav-link" id="link-about">Philosophy</a>
+                <a href="#b2p" class="nav-link" id="link-b2p">B2P Aggregator</a>
+                <a href="#b2b" class="nav-link" id="link-b2b">B2B Agentic</a>
+                <a href="#calculator" class="nav-link" id="link-calculator">Savings</a>
+                <a href="#responsible-ai" class="nav-link" id="link-ethics">Ethics</a>
+                <a href="#contact" class="nav-cta" id="btn-nav-contact">Apply for Audit</a>
+            </nav>
+            <button class="mobile-menu-btn" id="btn-mobile-menu" aria-label="Toggle Mobile Menu">
+                <i data-lucide="menu"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- ═══════════════════════════════════════════════
+         STORY SNAP SCROLL CONTAINER
+         ═══════════════════════════════════════════════ -->
+    <main class="story-container" id="story-scroll-wrapper">
+
+    <!-- ─── HERO ─── -->
+    <section class="section hero-section" id="hero">
+        <div class="container hero-grid">
+            <div class="hero-content" data-reveal>
+                <div class="hero-badge" id="badge-hero">
+                    <span class="hero-badge-pulse"></span>
+                    Now Scaling: B2P &amp; B2B AI Operations
+                </div>
+                <h1 class="hero-title" id="hero-main-title">
+                    <span class="hero-eyebrow">//00 MANIFESTO</span>
+                    Building the next wave of
+                    <span class="text-gradient-inline">digital intelligence</span>
+                </h1>
+                <p class="hero-lead" id="hero-lead-text">
+                    Inteligent Digital Products (IDP) is an AI-first product studio engineering low-latency B2P consumer aggregators and automating B2B SME operations via secure, customized multi-agent workflows.
+                </p>
+                <div class="hero-ctas">
+                    <a href="#b2b" class="btn-primary magnetic-btn" id="btn-hero-primary">
+                        <span class="btn-text">Automate Your Business</span>
+                        <span class="btn-shimmer"></span>
+                    </a>
+                    <a href="#b2p" class="btn-secondary magnetic-btn" id="btn-hero-secondary">
+                        <span class="btn-text">Explore B2P Aggregator</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="hero-visual" data-reveal data-reveal-delay="200">
+                <!-- Live Cloud Performance Dashboard Widget -->
+                <div class="glass-card dashboard-card" id="card-hero-dashboard">
+                    <div class="card-glow"></div>
+                    <div class="dashboard-header">
+                        <div class="dash-title">
+                            <span class="pulse-dot"></span>
+                            <span style="flex: 1;">Vertex AI Cluster Live Status</span>
+                        </div>
+                        <div class="dash-region">europe-southwest1<br>(Madrid)</div>
+                    </div>
+                    <div class="dash-stats">
+                        <div class="dash-stat">
+                            <span class="dash-stat-val text-gradient" id="stat-latency">140ms</span>
+                            <span class="dash-stat-lbl">Gemini 1.5 Flash Latency</span>
+                        </div>
+                        <div class="dash-stat">
+                            <span class="dash-stat-val text-gradient" id="stat-concurrency">99.98%</span>
+                            <span class="dash-stat-lbl">Cluster Availability</span>
+                        </div>
+                    </div>
+                    <div class="dash-log">
+                        <div class="log-row"><span class="log-time">[11:42:01]</span> B2P Scraper worker triggered on Standvirtual.</div>
+                        <div class="log-row"><span class="log-time">[11:42:05]</span> VPC Isolation Boundary validated for B2B Client.</div>
+                        <div class="log-row active-log"><span class="log-time">[11:44:13]</span> RAG embeddings vector index refreshed successfully.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── PHILOSOPHY ─── -->
+    <section class="section" id="about">
+        <div class="container">
+            <div class="section-header" data-reveal>
+                <div class="section-eyebrow">//01 THE DUAL-ENGINE METHODOLOGY</div>
+                <h2 class="section-title">The Dual-Engine Blueprint</h2>
+                <p class="section-subtitle">We merge consumer scale with corporate digital enablement to fuel Portugal's technological evolution.</p>
+            </div>
+
+            <div class="grid-2">
+                <div class="glass-card about-card" data-reveal data-reveal-delay="100">
+                    <div class="card-glow"></div>
+                    <div class="card-icon-box">
+                        <i data-lucide="users"></i>
+                    </div>
+                    <h3>B2P: High-Volume Scale</h3>
+                    <p>We build highly scalable, conversational interfaces that consolidate fragmented digital marketplaces. By wrapping scrapers in real-time Gemini reasoning pipelines, we enable zero-friction consumer search.</p>
+                    <div class="card-features">
+                        <div class="card-feat"><i data-lucide="shield-check"></i> Anonymized market intelligence</div>
+                        <div class="card-feat"><i data-lucide="shield-check"></i> Free-to-use search assistant</div>
+                    </div>
+                </div>
+
+                <div class="glass-card about-card" data-reveal data-reveal-delay="250">
+                    <div class="card-glow"></div>
+                    <div class="card-icon-box">
+                        <i data-lucide="building-2"></i>
+                    </div>
+                    <h3>B2B: SME Digitalization</h3>
+                    <p>We deploy customized multi-agent pipelines and localized automation systems directly into local SMEs. We remove routine operational administrative load, letting teams focus strictly on human growth.</p>
+                    <div class="card-features">
+                        <div class="card-feat"><i data-lucide="shield-check"></i> Custom agentic workflows (LangGraph)</div>
+                        <div class="card-feat"><i data-lucide="shield-check"></i> GDPR-isolated VPC private databases</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── B2P SECTION (RELOAD) ─── -->
+    <section class="section" id="b2p">
+        <div class="container">
+            <div class="grid-2-asymmetric align-center">
+                <div class="b2p-content" data-reveal>
+                    <div class="section-eyebrow">//02 B2P CONVERSATIONAL PRODUCT (RELOAD)</div>
+                    <h2 class="section-title">RELOAD: Smart Secondhand Search</h2>
+                    <p class="section-desc">
+                        The used goods market in Portugal is highly fragmented across OLX, Vinted, and Standvirtual. <strong>RELOAD</strong> is a state-of-the-art conversational assistant that indexes these portals in real-time.
+                    </p>
+                    <div class="feature-bullets">
+                        <div class="feature-bullet">
+                            <div class="feature-bullet-icon"><i data-lucide="message-square-code"></i></div>
+                            <div>
+                                <h4>Conversational Input Parsing</h4>
+                                <p>Describe what you want naturally—our model parses intent, filters noise, and executes structured comparative crawls.</p>
+                            </div>
+                        </div>
+                        <div class="feature-bullet">
+                            <div class="feature-bullet-icon"><i data-lucide="cpu"></i></div>
+                            <div>
+                                <h4>Gemini-Powered Value Ranking</h4>
+                                <p>Vertex AI algorithms rank listings by best price-to-condition ratios, displaying only verified premium recommendations.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chatbot Simulator -->
+                <div class="chatbot-wrapper" data-reveal data-reveal-delay="200">
+                    <div class="glass-card chatbot-card" id="card-chat-simulator">
+                        <div class="card-glow"></div>
+                        <div class="chat-header">
+                            <div class="chat-status">
+                                <span class="pulse-dot"></span>
+                                RELOAD AI Beta Engine
+                            </div>
+                            <span class="chat-engine-tag">Vertex AI Connected</span>
+                        </div>
+                        <div class="chat-body" id="chat-messages-container">
+                            <div class="message incoming">
+                                Welcome to RELOAD! 👋 Try searching for a product in our Portuguese secondhand index. Tap a preset search or type your custom query below!
+                            </div>
+                        </div>
+                        <div class="chat-footer">
+                            <div class="chat-suggestions" id="chat-suggestions">
+                                <button class="suggestion-btn" data-query="bike">🚲 Mountain bike, under €400</button>
+                                <button class="suggestion-btn" data-query="jacket">🧥 Arc'teryx jacket, size L</button>
+                            </div>
+                            <div class="chat-input-row">
+                                <input type="text" placeholder="Type your custom secondhand query..." class="chat-input" id="input-chat-text">
+                                <button class="btn-send" id="btn-chat-send" disabled><i data-lucide="send"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── B2B SECTION ─── -->
+    <section class="section" id="b2b">
+        <div class="container">
+            <div class="grid-2 align-center">
+                <div class="b2b-content" data-reveal>
+                    <div class="section-eyebrow">//03 B2B ENTERPRISE WORKFLOWS</div>
+                    <h2 class="section-title">Automate complex B2B workflows</h2>
+                    <p class="section-desc">
+                        We act as your dedicated AI engineering team, building custom multi-agent systems to streamline operations for SMEs without technical overhead.
+                    </p>
+                    <div class="feature-bullets">
+                        <div class="feature-bullet">
+                            <div class="feature-bullet-icon"><i data-lucide="shield-alert"></i></div>
+                            <div>
+                                <h4>Isolated Data Silos</h4>
+                                <p>Client documentation is securely locked in dedicated partitions. Your data is never used to train public models.</p>
+                            </div>
+                        </div>
+                        <div class="feature-bullet">
+                            <div class="feature-bullet-icon"><i data-lucide="cloud-lightning"></i></div>
+                            <div>
+                                <h4>Serverless Infrastructure</h4>
+                                <p>Deployed on Cloud Run for zero-maintenance. Pay only for the exact compute time used, eliminating high monthly fees.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="b2b-visual" data-reveal data-reveal-delay="200">
+                    <div class="glass-card pipeline-card" id="card-architecture-box">
+                        <div class="card-glow"></div>
+                        <div class="pipeline-header">B2B SECURE TENANT PIPELINE</div>
+                        <div class="pipeline-step" id="step-1">
+                            <span class="pipeline-num">1</span>
+                            <div class="pipeline-text">
+                                <strong>Secure Client Document Intake</strong>
+                                <p>PDF and invoice parsing using high-performance Vertex AI OCR.</p>
+                            </div>
+                        </div>
+                        <div class="pipeline-step active" id="step-2">
+                            <span class="pipeline-num">2</span>
+                            <div class="pipeline-text">
+                                <strong>Multi-Agent Reasoning (Gemini Pro)</strong>
+                                <p>LangGraph orchestrator validates and matches items against local databases.</p>
+                            </div>
+                        </div>
+                        <div class="pipeline-step" id="step-3">
+                            <span class="pipeline-num">3</span>
+                            <div class="pipeline-text">
+                                <strong>Secure ERP / ERP Output</strong>
+                                <p>Automatic accounting synchronization under strict VPC Service Controls.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── SAVINGS CALCULATOR ─── -->
+    <section class="section" id="calculator">
+        <div class="container">
+            <div class="section-header" data-reveal>
+                <div class="section-eyebrow">//04 B2B PERFORMANCE METRICS</div>
+                <h2 class="section-title">Calculate Your SME Productivity Gains</h2>
+                <p class="section-subtitle">Slide the parameters below to see how much time and money our agentic workflows can save your company annually.</p>
+            </div>
+
+            <div class="grid-2 align-center">
+                <div class="glass-card calc-controls" data-reveal data-reveal-delay="100">
+                    <div class="card-glow"></div>
+                    <div class="calc-group">
+                        <div class="calc-label-row">
+                            <label for="range-staff">Number of Admin Staff</label>
+                            <span class="calc-value" id="display-staff">5</span>
+                        </div>
+                        <input type="range" id="range-staff" min="1" max="50" value="5" class="calc-slider">
+                    </div>
+                    <div class="calc-group">
+                        <div class="calc-label-row">
+                            <label for="range-hours">Manual Hours per staff weekly</label>
+                            <span class="calc-value" id="display-hours">15</span>
+                        </div>
+                        <input type="range" id="range-hours" min="5" max="40" value="15" class="calc-slider">
+                    </div>
+                    <div class="calc-group last">
+                        <div class="calc-label-row">
+                            <label for="range-wage">Average Hourly Labor Cost (€)</label>
+                            <span class="calc-value" id="display-wage">18</span>
+                        </div>
+                        <input type="range" id="range-wage" min="10" max="50" value="18" class="calc-slider">
+                    </div>
+                </div>
+
+                <div class="calc-wrapper" data-reveal data-reveal-delay="300">
+                    <div class="glass-card calc-results">
+                        <div class="card-glow"></div>
+                        <div class="calc-results-glow"></div>
+                        <div class="calc-results-label">ESTIMATED ANNUAL SAVINGS</div>
+                        <div class="calc-results-amount text-gradient" id="result-savings">€56,160</div>
+                        <div class="calc-metrics">
+                            <div class="calc-metric">
+                                <span class="calc-metric-val" id="result-hours">3,120</span>
+                                <span class="calc-metric-lbl">Administrative Hours Saved / Yr</span>
+                            </div>
+                            <div class="calc-metric">
+                                <span class="calc-metric-val" id="result-productivity">+80%</span>
+                                <span class="calc-metric-lbl">Staff Operational Boost</span>
+                            </div>
+                        </div>
+                        <a href="#contact" class="btn-primary magnetic-btn btn-block" style="margin-top: 30px;">
+                            <span class="btn-text">Apply for AI Audit &amp; Pilot</span>
+                            <span class="btn-shimmer"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── RESPONSIBLE AI ─── -->
+    <section class="section" id="responsible-ai">
+        <div class="container">
+            <div class="glass-card ethics-card" id="card-responsible-ai" data-reveal>
+                <div class="card-glow"></div>
+                <div class="section-eyebrow">//05 RESPONSIBLE AI CHARTER</div>
+                <h2 class="section-title">Human-Centric &amp; Responsible AI</h2>
+                <p>Technology should always be built with moral values and human empathy at the center. We operate under a strict code of responsible innovation.</p>
+                <div class="charter-grid">
+                    <div class="charter-item" data-reveal data-reveal-delay="100">
+                        <i data-lucide="fingerprint"></i>
+                        <h4>Absolute Privacy</h4>
+                        <p>We believe in privacy-first architecture. All user data inside our aggregators is fully anonymized. We strictly never sell raw personal database logs.</p>
+                    </div>
+                    <div class="charter-item" data-reveal data-reveal-delay="250">
+                        <i data-lucide="heart"></i>
+                        <h4>Human-in-the-Loop</h4>
+                        <p>Our B2B automation engines enforce human verification gates before triggering permanent databases or financial transactions.</p>
+                    </div>
+                    <div class="charter-item" data-reveal data-reveal-delay="400">
+                        <i data-lucide="globe"></i>
+                        <h4>Portuguese SME Context</h4>
+                        <p>Our agentic prompts are localized specifically for Portuguese regional constraints, accounting standards, and SME structural realities.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── CONTACT ─── -->
+    <section class="section" id="contact">
+        <div class="container">
+            <div class="grid-2 align-center">
+                <div class="contact-text" data-reveal>
+                    <div class="section-eyebrow">//06 SME COLLABORATION AUDIT</div>
+                    <h2 class="section-title">Join our B2B Pilot Program</h2>
+                    <p class="section-desc">
+                        Are you a small or medium business in Portugal? Apply for a free <strong>AI Audit &amp; Pilot</strong>. Our engineering team will review your manual workflows and compile a custom agentic proof-of-concept.
+                    </p>
+                    <div class="office-location">
+                        <i data-lucide="map-pin"></i> Lisbon, Portugal (WET / Lisbon Time)
+                    </div>
+                </div>
+
+                <div class="glass-card form-card" id="card-contact-form-holder" data-reveal data-reveal-delay="200">
+                    <div class="card-glow"></div>
+                    <h3>Request an AI Audit</h3>
+                    <form id="form-ai-audit">
+                        <div class="form-group">
+                            <label for="company-name">Company Name</label>
+                            <input type="text" id="company-name" required placeholder="Inteligent Corp">
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-email">Corporate Email</label>
+                            <input type="email" id="contact-email" required placeholder="name@company.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="workflow-description">What manual workflow takes you the most time?</label>
+                            <textarea id="workflow-description" rows="4" required placeholder="E.g., sorting paper invoices, replying to client emails, inputting Standvirtual listings manually..."></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary magnetic-btn btn-block" id="btn-submit-form">
+                            <span class="btn-text">Submit Application</span>
+                            <span class="btn-shimmer"></span>
+                        </button>
+                    </form>
+                    <div class="form-success" id="form-success-box" style="display: none;">
+                        <i data-lucide="party-popper" class="success-icon"></i>
+                        <h4>Application Submitted Successfully!</h4>
+                        <p>Thank you! Our engineering team will review your workflow and respond within 24 hours.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── FOOTER ─── -->
+    <footer class="main-footer section" id="footer-section">
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <a href="#hero" class="footer-logo"><span class="logo-accent">I</span>DP</a>
+                <p>Inteligent Digital Products. Building next-generation digital products powered by Responsible AI.</p>
+            </div>
+            <div class="footer-links-wrap">
+                <div class="footer-col">
+                    <h4>Products</h4>
+                    <a href="#b2p">RELOAD (B2P)</a>
+                    <a href="#b2b">SME Agentic (B2B)</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <a href="#about">Philosophy</a>
+                    <a href="#responsible-ai">Ethical Charter</a>
+                    <a href="#contact">Apply Audit</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2026 Inteligent Digital Products. All rights reserved. Built with love in Lisbon, Portugal.</p>
+            </div>
+        </div>
+    </footer>
+    </main>
+
+    <!-- Script -->
+    <script src="script.js"></script>
+</body>
+</html>
