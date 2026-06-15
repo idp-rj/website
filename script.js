@@ -713,6 +713,14 @@ function initStoryScroll() {
     const sections = document.querySelectorAll('.story-container .section');
     if (!wrapper || !sections.length) return;
 
+    let introFinished = false;
+
+    // Automatically reveal the header once the cinematic intro finishes
+    setTimeout(() => {
+        introFinished = true;
+        onScroll();
+    }, 11000);
+
     /* ── Auto text-split for word-reveal ──────────────────── */
     sections.forEach((section) => {
         const titles = section.querySelectorAll('.section-title');
@@ -803,15 +811,21 @@ function initStoryScroll() {
             dot.classList.toggle('active', idx === closestIdx);
         });
 
-        /* Hide side-nav dots only and exclusively when footer (idx 7) is in view */
+        /* Hide side-nav dots only and exclusively when footer (idx 8) is in view */
         const sideNav = document.getElementById('side-nav-dots');
         if (sideNav) {
-            sideNav.classList.toggle('hidden', closestIdx === 7);
+            sideNav.classList.toggle('hidden', closestIdx === 8);
         }
 
-        /* Nav links */
+        /* Hide navbar on the first scroll point (closestIdx === 0) if the intro hasn't finished */
+        const header = document.getElementById('main-header');
+        if (header) {
+            header.classList.toggle('hidden-navbar', closestIdx === 0 && !introFinished);
+        }
+
+        /* Nav links (offset by 1 due to the new landing section at index 0) */
         navLinks.forEach((link, idx) => {
-            link.classList.toggle('active', idx === closestIdx);
+            link.classList.toggle('active', idx === closestIdx - 1);
         });
 
         /* Parallax */
@@ -889,9 +903,9 @@ function initCelestialParticles() {
     let scrollTimeout = null;
 
     const isMobile = window.innerWidth < 768;
-    const PARTICLE_COUNT = isMobile ? 40 : 110;
-    const CONNECTION_DIST = isMobile ? 80 : 120;
-    const REPULSION_RADIUS = 150;
+    const PARTICLE_COUNT = isMobile ? 45 : 120;
+    const CONNECTION_DIST = isMobile ? 90 : 160;
+    const REPULSION_RADIUS = 220;
 
     function resize() {
         const parent = canvas.parentElement || document.body;
@@ -902,14 +916,18 @@ function initCelestialParticles() {
     function createParticles() {
         particles = [];
         for (let i = 0; i < PARTICLE_COUNT; i++) {
+            const baseVx = (Math.random() - 0.5) * 0.28; // Slow base speed when left alone
+            const baseVy = (Math.random() - 0.5) * 0.28;
             particles.push({
                 x: Math.random() * width,
                 y: Math.random() * height,
-                vx: (Math.random() - 0.5) * 0.9,
-                vy: (Math.random() - 0.5) * 0.9,
-                radius: 1 + Math.random() * 2,
-                baseAlpha: 0.2 + Math.random() * 0.4,
-                alpha: 0.3,
+                baseVx: baseVx,
+                baseVy: baseVy,
+                vx: baseVx,
+                vy: baseVy,
+                radius: 2 + Math.random() * 3.5,
+                baseAlpha: 0.35 + Math.random() * 0.45,
+                alpha: 0.4,
                 phase: Math.random() * Math.PI * 2,
             });
         }
@@ -933,23 +951,32 @@ function initCelestialParticles() {
             p.x += p.vx * scrollSpeedFactor;
             p.y += p.vy * scrollSpeedFactor;
 
-            /* Mouse repulsion */
+            /* Mouse repulsion (adds acceleration to velocity for inertia glide) */
             const dxM = p.x - mouseX;
             const dyM = p.y - mouseY;
             const distM = Math.sqrt(dxM * dxM + dyM * dyM);
             if (distM < REPULSION_RADIUS && distM > 0) {
                 const force = (REPULSION_RADIUS - distM) / REPULSION_RADIUS;
-                p.x += (dxM / distM) * force * 2.5;
-                p.y += (dyM / distM) * force * 2.5;
+                p.vx += (dxM / distM) * force * 1.5;
+                p.vy += (dyM / distM) * force * 1.5;
             }
 
-            /* Bounce on edges */
-            if (p.x < 0) { p.x = 0; p.vx *= -1; }
-            if (p.x > width) { p.x = width; p.vx *= -1; }
-            if (p.y < 0) { p.y = 0; p.vy *= -1; }
-            if (p.y > height) { p.y = height; p.vy *= -1; }
+            /* Apply inertia friction, returning slowly to base drift speed */
+            p.vx = p.vx * 0.94 + p.baseVx * 0.06;
+            p.vy = p.vy * 0.94 + p.baseVy * 0.06;
 
-            /* Draw particle */
+            /* Bounce on edges */
+            if (p.x < 0) { p.x = 0; p.vx *= -1; p.baseVx *= -1; }
+            if (p.x > width) { p.x = width; p.vx *= -1; p.baseVx *= -1; }
+            if (p.y < 0) { p.y = 0; p.vy *= -1; p.baseVy *= -1; }
+            if (p.y > height) { p.y = height; p.vy *= -1; p.baseVy *= -1; }
+
+            /* Draw particle with glowing halo */
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.radius * 2.2, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(0,242,254,${p.alpha * 0.22})`;
+            ctx.fill();
+
             ctx.beginPath();
             ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
             ctx.fillStyle = `rgba(0,242,254,${p.alpha})`;
@@ -970,7 +997,7 @@ function initCelestialParticles() {
                     ctx.moveTo(a.x, a.y);
                     ctx.lineTo(b.x, b.y);
                     ctx.strokeStyle = `rgba(0,122,255,${lineAlpha})`;
-                    ctx.lineWidth = 0.6;
+                    ctx.lineWidth = 0.8;
                     ctx.stroke();
                 }
             }
