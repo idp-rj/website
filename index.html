@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Inteligent Digital Products (IDP) — An AI-native product studio building next-generation B2P consumer utilities and B2B SME agentic digital transformation workflows in Portugal.">
-    <title>IDP | AI-Native Product Studio — Inteligent Digital Products</title>
+    <meta name="description" content="Intelligent Digital Products (IDP) — An AI-native product studio building next-generation B2P consumer utilities and B2B SME agentic digital transformation workflows in Portugal.">
+    <title>IDP | AI-Native Product Studio — Intelligent Digital Products</title>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800;900&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <!-- Stylesheet -->
     <link rel="stylesheet" href="style.css">
@@ -139,7 +139,7 @@
                     <span class="text-gradient-inline">digital intelligence</span>
                 </h1>
                 <p class="hero-lead" id="hero-lead-text">
-                    Inteligent Digital Products (IDP) is an AI-first product studio engineering low-latency B2P consumer aggregators and automating B2B SME operations via secure, customized multi-agent workflows.
+                    Intelligent Digital Products (IDP) is an AI-first product studio engineering low-latency B2P consumer aggregators and automating B2B SME operations via secure, customized multi-agent workflows.
                 </p>
                 <div class="hero-ctas">
                     <a href="#b2b" class="btn-primary magnetic-btn" id="btn-hero-primary">
@@ -450,17 +450,22 @@
                     <div class="card-glow"></div>
                     <h3>Request an AI Audit</h3>
                     <form id="form-ai-audit">
+                        <!-- Web3Forms Configuration -->
+                        <input type="hidden" name="access_key" value="5b65e01e-234f-4a71-be97-a8fb727a3b47">
+                        <input type="hidden" name="subject" value="New AI Audit Application - IDP Studio">
+                        <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+
                         <div class="form-group">
                             <label for="company-name">Company Name</label>
-                            <input type="text" id="company-name" required placeholder="Inteligent Corp">
+                            <input type="text" id="company-name" name="company_name" required placeholder="Intelligent Corp">
                         </div>
                         <div class="form-group">
                             <label for="contact-email">Corporate Email</label>
-                            <input type="email" id="contact-email" required placeholder="name@company.com">
+                            <input type="email" id="contact-email" name="email" required placeholder="name@company.com">
                         </div>
                         <div class="form-group">
                             <label for="workflow-description">What manual workflow takes you the most time?</label>
-                            <textarea id="workflow-description" rows="4" required placeholder="E.g., sorting paper invoices, replying to client emails, inputting Standvirtual listings manually..."></textarea>
+                            <textarea id="workflow-description" name="workflow_description" rows="4" required placeholder="E.g., sorting paper invoices, replying to client emails, inputting Standvirtual listings manually..."></textarea>
                         </div>
                         <button type="submit" class="btn-primary magnetic-btn btn-block" id="btn-submit-form">
                             <span class="btn-text">Submit Application</span>
@@ -482,7 +487,7 @@
         <div class="container footer-grid">
             <div class="footer-brand">
                 <a href="#hero" class="footer-logo"><span class="logo-accent">I</span>DP</a>
-                <p>Inteligent Digital Products. Building next-generation digital products powered by Responsible AI.</p>
+                <p>Intelligent Digital Products. Building next-generation digital products powered by Responsible AI.</p>
             </div>
             <div class="footer-links-wrap">
                 <div class="footer-col">
@@ -500,7 +505,7 @@
         </div>
         <div class="footer-bottom">
             <div class="container">
-                <p>&copy; 2026 Inteligent Digital Products. All rights reserved. Built with love in Lisbon, Portugal.</p>
+                <p>&copy; 2026 Intelligent Digital Products. All rights reserved. Built with love in Lisbon, Portugal.</p>
             </div>
         </div>
     </footer>

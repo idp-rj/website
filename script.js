@@ -630,24 +630,48 @@ function initContactForm() {
         e.preventDefault();
 
         const submitBtn = form.querySelector('button[type="submit"], .magnetic-btn[type="submit"], input[type="submit"]') || form.querySelector('button');
-        if (submitBtn) {
+        const btnText = submitBtn ? submitBtn.querySelector('.btn-text') : null;
+        
+        if (submitBtn && btnText) {
             submitBtn.disabled = true;
-            submitBtn.textContent = 'Analyzing manual SME workflows...';
+            btnText.textContent = 'Analyzing manual SME workflows...';
         }
 
-        setTimeout(() => {
-            if (formHolder) {
-                const h3 = formHolder.querySelector('h3');
-                if (h3) h3.style.display = 'none';
-                form.style.display = 'none';
+        const formData = new FormData(form);
+
+        fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            body: formData
+        })
+        .then(async (response) => {
+            const result = await response.json();
+            if (response.status === 200) {
+                if (formHolder) {
+                    const h3 = formHolder.querySelector('h3');
+                    if (h3) h3.style.display = 'none';
+                    form.style.display = 'none';
+                } else {
+                    form.style.display = 'none';
+                }
+                if (successBox) {
+                    successBox.style.display = 'block';
+                    try { lucide.createIcons(); } catch (_) { /* noop */ }
+                }
             } else {
-                form.style.display = 'none';
+                alert(result.message || 'Something went wrong. Please try again.');
+                if (submitBtn && btnText) {
+                    submitBtn.disabled = false;
+                    btnText.textContent = 'Submit Application';
+                }
             }
-            if (successBox) {
-                successBox.style.display = 'block';
-                try { lucide.createIcons(); } catch (_) { /* noop */ }
+        })
+        .catch(() => {
+            alert('Unable to submit form. Please check your internet connection and try again.');
+            if (submitBtn && btnText) {
+                submitBtn.disabled = false;
+                btnText.textContent = 'Submit Application';
             }
-        }, 1500);
+        });
     });
 }
 
