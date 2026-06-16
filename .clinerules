@@ -1,0 +1,4 @@
+# Git Commit Rules
+- **Sempre** pedir aprovação explícita do utilizador antes de fazer qualquer commit (`git commit`).
+- Mostrar um resumo claro das alterações efetuadas antes de propor o commit.
+- Apresentar a mensagem de commit sugerida para que o utilizador a possa validar ou ajustar antes de executar.

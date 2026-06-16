@@ -26,7 +26,38 @@ document.addEventListener('DOMContentLoaded', () => {
    ─────────────────────────────────────────────────────────────── */
 function initIntroSequence() {
     const overlay = document.getElementById('intro-overlay');
+    
+    function adjustTypewriterWidth() {
+        const typewriterText = document.querySelector('.typewriter-text');
+        if (typewriterText) {
+            const charCount = typewriterText.textContent.trim().length;
+            typewriterText.style.setProperty('--chars', charCount);
+            
+            typewriterText.style.setProperty('width', 'auto', 'important');
+            typewriterText.style.setProperty('display', 'inline-block', 'important');
+            const exactWidth = typewriterText.scrollWidth;
+            typewriterText.style.removeProperty('width');
+            typewriterText.style.removeProperty('display');
+            typewriterText.style.setProperty('--width-px', `${exactWidth}px`);
+        }
+    }
+
+    adjustTypewriterWidth();
+    window.addEventListener('load', adjustTypewriterWidth);
+    window.addEventListener('resize', adjustTypewriterWidth);
+    if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(adjustTypewriterWidth);
+    }
+
     if (!overlay) return;
+
+    // Skip intro if user has visited the site before
+    if (localStorage.getItem('idp_intro_seen') === 'true') {
+        document.documentElement.classList.add('no-intro');
+        overlay.style.display = 'none';
+        triggerHeroReveal();
+        return;
+    }
 
     setTimeout(() => {
         overlay.classList.add('done');
@@ -35,6 +66,7 @@ function initIntroSequence() {
     setTimeout(() => {
         overlay.style.display = 'none';
         triggerHeroReveal();
+        localStorage.setItem('idp_intro_seen', 'true');
     }, 3200);
 }
 
@@ -214,7 +246,7 @@ function initNavbarScroll() {
     const scrollWrapper = document.getElementById('story-scroll-wrapper');
 
     function handleScroll() {
-        const isSnapScroll = window.innerWidth >= 992 && window.innerHeight >= 650;
+        const isSnapScroll = window.innerHeight >= 480;
         const scrollTop = isSnapScroll && scrollWrapper 
             ? scrollWrapper.scrollTop 
             : (window.scrollY || document.documentElement.scrollTop);
@@ -699,13 +731,15 @@ function initStoryScroll() {
     const sections = document.querySelectorAll('.story-container .section');
     if (!wrapper || !sections.length) return;
 
-    let introFinished = false;
+    let introFinished = localStorage.getItem('idp_intro_seen') === 'true';
 
     // Automatically reveal the header once the cinematic intro finishes
-    setTimeout(() => {
-        introFinished = true;
-        onScroll();
-    }, 11000);
+    if (!introFinished) {
+        setTimeout(() => {
+            introFinished = true;
+            onScroll();
+        }, 11000);
+    }
 
     /* ── Auto text-split for word-reveal ──────────────────── */
     sections.forEach((section) => {
@@ -762,7 +796,7 @@ function initStoryScroll() {
 
     /* ── On scroll ────────────────────────────────────────── */
     function onScroll() {
-        const isSnapScroll = window.innerWidth >= 992 && window.innerHeight >= 650;
+        const isSnapScroll = window.innerHeight >= 480;
         const scrollTop = isSnapScroll ? wrapper.scrollTop : (window.scrollY || document.documentElement.scrollTop);
         const scrollHeight = isSnapScroll 
             ? (wrapper.scrollHeight - wrapper.clientHeight) 
@@ -827,7 +861,7 @@ function initStoryScroll() {
         dot.addEventListener('click', (e) => {
             e.preventDefault();
             if (sections[idx]) {
-                const isSnapScroll = window.innerWidth >= 992 && window.innerHeight >= 650;
+                const isSnapScroll = window.innerHeight >= 480;
                 if (isSnapScroll) {
                     wrapper.scrollTo({
                         top: sections[idx].offsetTop,
@@ -851,7 +885,7 @@ function initStoryScroll() {
                 e.preventDefault();
                 const target = document.querySelector(href);
                 if (target) {
-                    const isSnapScroll = window.innerWidth >= 992 && window.innerHeight >= 650;
+                    const isSnapScroll = window.innerHeight >= 480;
                     if (isSnapScroll) {
                         wrapper.scrollTo({
                             top: target.offsetTop,

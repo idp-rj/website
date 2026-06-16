@@ -411,9 +411,9 @@ a { color: inherit; text-decoration: none; }
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1100px;
+    max-width: 100%;
     margin: 0 auto;
-    padding: clamp(14px, 2vw, 24px) clamp(20px, 4vw, 30px);
+    padding: clamp(14px, 2vw, 24px) 5%;
     transition: var(--transition);
 }
 
@@ -728,6 +728,9 @@ a { color: inherit; text-decoration: none; }
     position: relative;
     z-index: 10;
     overflow: hidden;
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding-bottom: 80px; /* Space for the scroll indicator */
 }
 
 .title-section-container {
@@ -738,7 +741,7 @@ a { color: inherit; text-decoration: none; }
     width: 100% !important;
     max-width: 100% !important;
     padding: 0 clamp(20px, 5vw, 60px);
-    transform: translateY(-12vh); /* Shift everything further above center */
+    transform: translateY(-3vh); /* Reduced shift to balance the buttons and scroll indicator */
 }
 
 @keyframes blurReveal {
@@ -795,14 +798,14 @@ a { color: inherit; text-decoration: none; }
     -webkit-user-select: none;
     cursor: default;
     animation: 
-        typing 3.2s steps(28) 4.5s forwards, 
+        typing 3.2s steps(var(--chars, 28)) 4.5s forwards, 
         blink 0.75s step-end infinite, 
         hideCursor 0.1s 8.7s forwards;
 }
 
 @keyframes typing {
     from { width: 0; }
-    to { width: 28.8ch; } /* Fits 28 characters exactly in Outfit with scaling letter-spacing */
+    to { width: var(--width-px, calc(var(--chars, 28) * 1.05ch)); } /* Exact pixel width measured by JS, falls back to 1.05ch if JS hasn't run */
 }
 
 @keyframes blink {
@@ -813,6 +816,53 @@ a { color: inherit; text-decoration: none; }
 @keyframes hideCursor {
     to { border-right-color: transparent; }
 }
+
+/* Landing CTAs */
+.landing-ctas {
+    display: flex;
+    gap: 20px;
+    margin-top: 40px;
+    justify-content: center;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: blurReveal 2.2s cubic-bezier(0.16, 1, 0.3, 1) 9.5s both;
+    position: relative;
+    z-index: 100;
+}
+
+/* ───────────────────────────────────────────────────────────────
+   NO-INTRO OVERRIDES (Skip loading animations if already visited)
+   ─────────────────────────────────────────────────────────────── */
+.no-intro .intro-overlay {
+    display: none !important;
+}
+
+.no-intro .typewriter-text {
+    width: var(--width-px, calc(var(--chars, 28) * 1.05ch));
+    border-right-color: transparent !important;
+    animation: blink 0.75s step-end infinite !important;
+}
+
+.no-intro .landing-logo-container,
+.no-intro .landing-title-text {
+    opacity: 1 !important;
+    filter: blur(0) !important;
+    transform: translateY(0) !important;
+    animation: none !important;
+}
+
+.no-intro .landing-ctas {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    animation: none !important;
+}
+
+.no-intro .landing-title-word {
+    animation-delay: 0s !important;
+}
+.no-intro .landing-title-word:nth-child(1) { animation-delay: 0s !important; }
+.no-intro .landing-title-word:nth-child(2) { animation-delay: 0.4s !important; }
+.no-intro .landing-title-word:nth-child(3) { animation-delay: 0.8s !important; }
 
 .landing-title-text {
     font-size: clamp(1.4rem, 6.2vw, 5.8rem);
@@ -1737,6 +1787,7 @@ a { color: inherit; text-decoration: none; }
     letter-spacing: 1.5px;
     color: var(--text-1);
     margin-bottom: 8px;
+    text-align: center;
 }
 
 .footer-col a {
@@ -1816,7 +1867,7 @@ a { color: inherit; text-decoration: none; }
     overflow: visible;
 }
 
-@media (min-width: 992px) and (min-height: 650px) {
+@media (min-height: 480px) {
     html, body {
         overflow: hidden !important;
         height: 100vh !important;
@@ -1839,7 +1890,7 @@ a { color: inherit; text-decoration: none; }
         height: 100dvh !important;
         scroll-snap-align: start !important;
         scroll-snap-stop: always !important;
-        padding: 80px 0 40px 0 !important;
+        padding: clamp(60px, 8vh, 80px) 0 clamp(20px, 4vh, 40px) 0 !important;
         margin: 0 !important;
         display: flex !important;
         align-items: center !important;
@@ -1964,6 +2015,250 @@ a { color: inherit; text-decoration: none; }
     .footer-col { text-align: center; align-items: center; }
 
     .cursor-trailer { display: none; }
+
+    /* Mobile responsive landing page scaling */
+    .typewriter-text {
+        font-size: clamp(1rem, 5.5vw, 1.8rem);
+    }
+
+    .landing-title-text {
+        font-size: clamp(1.4rem, 8.5vw, 3.2rem);
+        flex-wrap: wrap;
+        gap: 0.2em 0.5em;
+        line-height: 1.2;
+    }
+
+    .landing-title-word {
+        animation: none !important;
+    }
+
+    .landing-ctas {
+        flex-direction: column;
+        width: 100%;
+        max-width: 290px;
+        margin-left: auto;
+        margin-right: auto;
+        gap: 12px;
+        margin-top: 30px;
+    }
+
+    .landing-ctas .btn-primary,
+    .landing-ctas .btn-secondary {
+        width: 100% !important;
+        padding: 12px 24px !important;
+        font-size: 14px !important;
+    }
+
+    /* Prevent clipping on smaller screens by allowing internal vertical scrolling inside sections */
+    .section {
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   28. DESKTOP SNAP SCROLL
+   ═══════════════════════════════════════════════════════════════ */
+.story-container {
+    width: 100%;
+    height: auto;
+    overflow: visible;
+}
+
+@media (min-height: 480px) {
+    html, body {
+        overflow: hidden !important;
+        height: 100vh !important;
+        height: 100dvh !important;
+    }
+
+    .story-container {
+        height: 100vh !important;
+        height: 100dvh !important;
+        overflow-y: auto !important;
+        scroll-snap-type: y mandatory !important;
+        scroll-behavior: smooth !important;
+        scrollbar-width: none !important;
+    }
+
+    .story-container::-webkit-scrollbar { display: none !important; }
+
+    .section {
+        height: 100vh !important;
+        height: 100dvh !important;
+        scroll-snap-align: start !important;
+        scroll-snap-stop: always !important;
+        padding: clamp(60px, 8vh, 80px) 0 clamp(20px, 4vh, 40px) 0 !important;
+        margin: 0 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        overflow: hidden !important;
+    }
+
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   29. DISABLED STATES
+   ═══════════════════════════════════════════════════════════════ */
+.suggestion-btn:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.chat-input:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.btn-send:disabled {
+    opacity: 0.25;
+    pointer-events: none;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   30. RESPONSIVE
+   ═══════════════════════════════════════════════════════════════ */
+/* Redundant static overrides removed in favor of fluid typography clamp() */
+
+@media (max-width: 768px) {
+    .mobile-menu-btn { display: block; }
+
+    .nav-links {
+        position: fixed;
+        top: 0; right: -100%;
+        width: 300px; height: 100vh;
+        background: rgba(13,13,14,0.98);
+        backdrop-filter: blur(30px);
+        -webkit-backdrop-filter: blur(30px);
+        border-left: 1px solid var(--border);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 35px;
+        padding: 40px;
+        transition: right 0.5s var(--ease);
+        z-index: 999;
+        box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+    }
+
+    .nav-links.active { right: 0; }
+
+    .grid-2,
+    .grid-2-asymmetric {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 40px;
+    }
+
+    .hero-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .hero-lead { margin-left: auto; margin-right: auto; }
+
+    .hero-ctas {
+        width: 100%;
+        flex-direction: column;
+        gap: 15px;
+        align-items: center;
+    }
+
+    .hero-ctas a, .hero-ctas .btn-primary, .hero-ctas .btn-secondary { width: 100%; text-align: center; justify-content: center; }
+
+    /* Redundant static overrides removed in favor of fluid typography clamp() */
+
+    .about-card { padding: 40px 30px; }
+
+    .ethics-card { padding: 40px 30px; }
+
+    .charter-grid { grid-template-columns: 1fr; gap: 30px; }
+
+    .charter-item {
+        border-left: none;
+        border-top: 3px solid var(--accent);
+        padding-left: 0;
+        padding-top: 20px;
+    }
+
+    .form-card { padding: 30px 20px; }
+
+    .calc-controls, .calc-results { padding: 35px 25px; }
+
+    .reverse-grid { direction: ltr; }
+
+    .footer-grid {
+        flex-direction: column;
+        gap: 40px;
+        text-align: center;
+        align-items: center;
+    }
+
+    .footer-brand { text-align: center; max-width: 100%; }
+
+    .footer-links-wrap {
+        flex-direction: row;
+        width: 100%;
+        justify-content: space-around;
+        gap: 20px;
+    }
+
+    .footer-col { text-align: center; align-items: center; }
+
+    .cursor-trailer { display: none; }
+
+    /* Mobile responsive landing page scaling */
+    .typewriter-text {
+        font-size: clamp(1rem, 5.5vw, 1.8rem);
+    }
+
+    .landing-title-text {
+        font-size: clamp(1.4rem, 8.5vw, 3.2rem);
+        flex-wrap: wrap;
+        gap: 0.2em 0.5em;
+        line-height: 1.2;
+    }
+
+    .landing-title-word {
+        animation: none !important;
+    }
+
+    .landing-ctas {
+        flex-direction: column;
+        width: 100%;
+        max-width: 290px;
+        margin-left: auto;
+        margin-right: auto;
+        gap: 12px;
+        margin-top: 30px;
+    }
+
+    .landing-ctas .btn-primary,
+    .landing-ctas .btn-secondary {
+        width: 100% !important;
+        padding: 12px 24px !important;
+        font-size: 14px !important;
+    }
+
+    /* Prevent clipping on smaller screens by allowing internal vertical scrolling inside sections */
+    .section {
+        overflow-y: auto !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: flex-start !important;
+        align-items: center !important;
+        padding: 80px clamp(16px, 4vw, 24px) 40px clamp(16px, 4vw, 24px) !important;
+    }
+
+    /* Center section content vertically if it fits, otherwise align to top for scrollability */
+    .section > .container {
+        margin-top: auto !important;
+        margin-bottom: auto !important;
+    }
 }
 
 /* Redundant static overrides removed in favor of fluid typography clamp() */
