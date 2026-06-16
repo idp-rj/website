@@ -2018,7 +2018,7 @@ a { color: inherit; text-decoration: none; }
 
     /* Mobile responsive landing page scaling */
     .typewriter-text {
-        font-size: clamp(1rem, 5.5vw, 1.8rem);
+        font-size: clamp(0.85rem, 4vw, 1.6rem);
     }
 
     .landing-title-text {
@@ -2089,8 +2089,13 @@ a { color: inherit; text-decoration: none; }
         margin: 0 !important;
         display: flex !important;
         align-items: center !important;
-        justify-content: center !important;
-        overflow: hidden !important;
+        justify-content: flex-start !important;
+        overflow-y: auto !important;
+    }
+
+    .section > .container {
+        margin-top: auto !important;
+        margin-bottom: auto !important;
     }
 
 }
@@ -2213,7 +2218,7 @@ a { color: inherit; text-decoration: none; }
 
     /* Mobile responsive landing page scaling */
     .typewriter-text {
-        font-size: clamp(1rem, 5.5vw, 1.8rem);
+        font-size: clamp(0.85rem, 4vw, 1.6rem);
     }
 
     .landing-title-text {
