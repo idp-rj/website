@@ -572,7 +572,7 @@ function initSmeCalculator() {
 
     if (!rangeStaff || !rangeHours || !rangeWage) return;
 
-    const automationRate = 0.8;
+    const automationRate = 0.65;
     let currentDisplaySavings = 0;
     let currentDisplayHours = 0;
     let targetSavings = 0;
