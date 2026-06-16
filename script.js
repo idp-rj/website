@@ -265,10 +265,10 @@ function initLiveDashboard() {
     if (!statLatency || !dashLog) return;
 
     const logMessages = [
-        'Scraper pool checked standby nodes.',
+        'Ingestion agent pool checked standby nodes.',
         'VPC boundary confirmed strict GDPR isolation.',
         'Vertex AI endpoint health: 100% stable.',
-        'Scraper pipeline parsed standalone STANDVIRTUAL HTML.',
+        'BOLX marketplace inventory updated.',
         'Vector search embeddings index query processed.',
         'LangGraph active node transitioned successfully.',
     ];
@@ -318,49 +318,27 @@ function initChatSimulator() {
 
     /* ── Mock data ─────────────────────────────────────────── */
     const mockResponses = {
-        bike: {
-            intro: 'I have scanned **148 listings** across Vinted, OLX, and CustoJusto in real-time. Here are the top 2 matches optimized by [value-for-money]:',
+        machinery: {
+            intro: 'BOLX matched **14 industrial listings** across OLX, Amazon.es, and national retail and industrial catalogs:',
             listings: [
-                {
-                    portal: 'VINTED',
-                    portalClass: 'vinted',
-                    title: 'Specialized Rockhopper Comp 29',
-                    price: '€380',
-                    desc: 'Size M, Porto. In **excellent condition**. 1x9 Shimano drivetrain, hydraulic brakes. Original purchase receipt included.',
-                    rating: '★★★★★ (Excellent Deal)',
-                },
                 {
                     portal: 'OLX',
                     portalClass: 'olx',
-                    title: 'Trek Marlin 7 (2024 Model)',
-                    price: '€395',
-                    desc: 'Size M, Vila Nova de Gaia. Good condition, minor cosmetic scratches on frame. Local pickup only.',
-                    rating: '★★★★☆ (Fair Price)',
-                },
-            ],
-            outro: 'Would you like me to contact the seller of the **Specialized Rockhopper** or refine the search with standard parameters?',
-        },
-        jacket: {
-            intro: 'Scanned **82 listings** on Vinted and OLX. Filtered 6 duplicates. Here are the top matches for premium outdoor gear:',
-            listings: [
-                {
-                    portal: 'VINTED',
-                    portalClass: 'vinted',
-                    title: "Arc'teryx Beta LT Jacket - Black",
-                    price: '€240',
-                    desc: 'Size L. GORE-TEX shell. **Barely worn (9.5/10 condition)**, shipping from Braga. Authenticity checked.',
-                    rating: '★★★★★ (Save 48% vs Retail)',
+                    title: 'Industrial CNC Milling Machine - 3-Axis',
+                    price: '€4,200',
+                    desc: 'Location: Porto. Commercial grade, verified seller. Ready for workshop deployment.',
+                    rating: '★★★★★ (Optimal Regional Match)',
                 },
                 {
-                    portal: 'OLX',
-                    portalClass: 'olx',
-                    title: 'The North Face Summit Series',
-                    price: '€215',
-                    desc: 'Size L, Red. Good condition, minor abrasion on left sleeve cuff. Local pickup in Lisbon.',
-                    rating: '★★★☆☆ (Standard Market Price)',
+                    portal: 'AMAZON',
+                    portalClass: 'amazon',
+                    title: 'Precision CNC Router Kit 6040',
+                    price: '€1,850',
+                    desc: 'Shipped from Amazon Spain. High precision spindle, USB controller setup.',
+                    rating: '★★★★☆ (Retail Benchmark)',
                 },
             ],
-            outro: "I recommend the **Arc'teryx Beta LT** on Vinted due to its high resale liquidity. Shall I generate a custom reply script for the seller?",
+            outro: 'We are monitoring additional channels. Would you like to set an automated price threshold alert?',
         },
     };
 
@@ -398,7 +376,7 @@ function initChatSimulator() {
                 <div class="loader-dots">
                     <span class="dot"></span><span class="dot"></span><span class="dot"></span>
                 </div>
-                <span class="loader-text">Simulating parallel scraping crawls on Portuguese secondhand portals...</span>
+                <span class="loader-text">Searching OLX, Amazon.es, and national industrial catalogs in parallel...</span>
             </div>`;
         messagesContainer.appendChild(msg);
         scrollToBottom();
@@ -445,18 +423,26 @@ function initChatSimulator() {
     function getFallbackResponse(query) {
         const count = Math.floor(Math.random() * 100) + 30;
         return {
-            intro: `Scanned **${count} listings** across Vinted, OLX, and CustoJusto for "${query}". Applying relevance filters and duplicate detection...`,
+            intro: `BOLX matched **${count} listings** across OLX.pt, Amazon.es, and others for "${query}". Filtering and organizing price metrics...`,
             listings: [
                 {
-                    portal: 'VINTED',
-                    portalClass: 'vinted',
-                    title: `${query.charAt(0).toUpperCase() + query.slice(1)} — Top Match`,
-                    price: '€' + (Math.floor(Math.random() * 300) + 50),
-                    desc: `Best match found for **"${query}"**. Condition verified. Shipping available across Portugal.`,
-                    rating: '★★★★☆ (Good Deal)',
+                    portal: 'OLX',
+                    portalClass: 'olx',
+                    title: `${query.charAt(0).toUpperCase() + query.slice(1)} — Regional Match`,
+                    price: '€' + (Math.floor(Math.random() * 1000) + 100),
+                    desc: `Matched entry for **"${query}"** on regional commercial nodes.`,
+                    rating: '★★★★☆ (Optimal regional value)',
+                },
+                {
+                    portal: 'AMAZON',
+                    portalClass: 'amazon',
+                    title: `${query.charAt(0).toUpperCase() + query.slice(1)} — Global Ingest`,
+                    price: '€' + (Math.floor(Math.random() * 1200) + 120),
+                    desc: `Amazon.es retail node ingestion. Direct delivery available.`,
+                    rating: '★★★★☆ (Retail Baseline)',
                 },
             ],
-            outro: `Would you like me to expand this search for **"${query}"** to additional marketplaces or set up a price alert?`,
+            outro: `We are monitoring additional channels for "${query}". Would you like to refine the procurement parameters?`,
         };
     }
 
